@@ -1,0 +1,21 @@
+service: aws-api-jest-unit-testing
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-2
+  profile: eddie-personal
+  deploymentMethod: direct
+
+functions:
+  hello:
+    handler: src/handlers/handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
