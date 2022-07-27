@@ -4,14 +4,22 @@
   "main": "handler.ts",
   "scripts": {
     "local-hello": "serverless invoke local -f hello",
+    "local-getCustomer": "serverless invoke local -f getCustomer",
+
     "local-api": "serverless offline start --printOutput",
     "deploy": "serverless deploy --verbose",
     "remote-hello": "serverless invoke -f hello",
-    "remove": "serverless remove"
+    "remote-getCustomer": "serverless invoke -f getCustomer",
+    
+    "remove": "serverless remove",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "jest": "^28.1.3",
     "serverless-offline": "^9.0.0",
     "serverless-plugin-typescript": "^2.1.2",
+    "ts-jest": "^28.0.7",
     "typescript": "^4.7.4"
   }
 }
