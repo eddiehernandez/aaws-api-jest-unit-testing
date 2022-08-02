@@ -35,24 +35,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var Customer = /** @class */ (function () {
-    function Customer() {
-    }
-    return Customer;
-}());
+Object.defineProperty(exports, "__esModule", { value: true });
+var CustomersController_1 = require("../controllers/CustomersController");
+var CustomerMockRepo_1 = require("../repos/CustomerMockRepo");
+// Eventually this can be replaced by a factory.  For now just directly instantiating for testing purposes.
+var _customersRepo = new CustomerMockRepo_1.default();
+var _customersController = new CustomersController_1.default(_customersRepo);
 module.exports.main = function (event) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, customersDb, customer, response;
-    return __generator(this, function (_a) {
-        id = event.pathParameters.id;
+    var id, response;
+    var _a;
+    return __generator(this, function (_b) {
+        id = (_a = event.pathParameters) === null || _a === void 0 ? void 0 : _a.id;
+        if (!id) {
+            return [2 /*return*/, {
+                    statusCode: 404,
+                    body: JSON.stringify({ message: "Customer id is missing in path parameter. (i.e. /customers/123)" })
+                }];
+        }
         console.log("id = ".concat(id));
-        customersDb = [];
-        customer = new Customer();
-        customer.id = 123;
-        customer.name = 'Johnny Man';
-        customer.email = 'johnny@me.com';
-        customer.company = 'ABC Healthcare System';
-        customersDb.push(customer);
-        response = customersDb.find(function (x) { return x.id == id; });
+        response = _customersController.getCustomer(id);
         console.log('response = ', response);
         if (!response) {
             return [2 /*return*/, {

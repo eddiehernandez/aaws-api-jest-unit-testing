@@ -1,13 +1,17 @@
+import Customer from "../models/Customer";
+import ICustomerRepo from "../repos/ICustomerRepo";
+
 export default class CustomersController {
 
+    private _customersRepo: ICustomerRepo
 
-
-    getCustomer(id: string): string {
-        return 'this is a test response';
+    constructor (customersRepo: ICustomerRepo){
+        this._customersRepo = customersRepo
     }
 
-
-
+    getCustomer(id: number): Customer | undefined {
+        return this._customersRepo.getCustomer(id)
+    }
 
 
 }
